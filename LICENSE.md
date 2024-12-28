@@ -1,4 +1,4 @@
-# Exchange Simulator - Proprietary License
+# Exchange Simulator - License Information
 
 This software and its associated source code are proprietary and the exclusive property of Sotirios Liaskos. 
 
