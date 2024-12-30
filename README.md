@@ -1,6 +1,6 @@
 # YorkStockSim
 
-#### Stock Exchange Simulator
+## Stock Exchange Simulator
 
 #### Overview
 
