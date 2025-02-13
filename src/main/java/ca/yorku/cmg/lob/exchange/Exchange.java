@@ -108,7 +108,7 @@ public class Exchange {
 			oOutcome = ____________.processOrder(o, time);
 			//If the quanity of the unfulfilled order in the outcome is not zero
 			if (_____________________ > 0) {
-				//Not the entire order was fulfilled, add the unfulfilled order to the bid half-book 
+				//Not the entire bid order was fulfilled, add the unfulfilled part to the bid half-book 
 				_______________________________________________;
 			}
 		} else { //order is an ask
@@ -116,7 +116,7 @@ public class Exchange {
 			oOutcome = ____________.processOrder(o, time);
 			//If the quanity of the unfulfilled order in the outcome is not zero
 			if (oOutcome.getUnfulfilledOrder().getQuantity() > 0) {
-				// Not the entire order was fulfilled, add it to the bid half-book
+				//Not the entire ask order was fulfilled, add the unfulfilled part to the ask half-book 
 				_______________________________________________;
 			}			
 		}
