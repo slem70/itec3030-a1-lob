@@ -56,7 +56,7 @@ public class Exchange {
 	public boolean validateOrder(IOrder o) {
 		// Does ticker exist? See if the security associated with the order exists in the list of securities
 		if (sec == null) {
-			System.err.println("Order validation: ticker " + o.getTicker() + " not supported.");
+			System.err.println("Order validation: ticker " + o.getSecurity().getTicker() + " not supported.");
 			return (false);
 		}
 		
@@ -67,13 +67,13 @@ public class Exchange {
 		}
 
 		//Put in pos the position that the trader mentioned in the order has in the security mentioned in the order
-		int pos = accounts.getTraderAccount(trader).getPosition(o.getTicker());
+		int pos = accounts.getTraderAccount(trader).getPosition(o.getSecurity().getTicker());
 		//Get the balance the trader has with the exchange
 		long bal = accounts.getTraderAccount(trader).getBalance();
 
 		// Does ask trader have position at the security sufficient for a sell?
 		if ((o instanceof Ask) && (pos < o.getQuantity())) {
-			System.err.println("Order validation: seller with ID " + o.getID() + " not enough shares of " + o.getTicker() + ": has " + pos + " and tries to sell " + o.getQuantity());
+			System.err.println("Order validation: seller with ID " + o.getID() + " not enough shares of " + o.getSecurity().getTicker() + ": has " + pos + " and tries to sell " + o.getQuantity());
 			return (false);
 		}
 		
@@ -140,7 +140,7 @@ public class Exchange {
 			//Apply the trade payment to the account balance of the buyer (they spent money)
 			accounts.getTraderAccount(t.getBuyer()).applyTradePayment(-t.getTradeValue());
 			//Add the bought stocks to the position of the buyer
-			accounts.getTraderAccount(t.getBuyer()).updatePosition(t.getSecurity(), t.getQuantity());
+			accounts.getTraderAccount(t.getBuyer()).updatePosition(t.getSecurity().getTicker(), t.getQuantity());
 			
 			//Update balances for Seller
 			
@@ -151,7 +151,7 @@ public class Exchange {
 			//Apply the trade payment to the account balance of the seller (they earned money)
 			accounts.getTraderAccount(t.getSeller()).applyTradePayment(t.getTradeValue());
 			//Deduct the sold stocks from the position of the seller
-			accounts.getTraderAccount(t.getSeller()).updatePosition(t.getSecurity(), -t.getQuantity());
+			accounts.getTraderAccount(t.getSeller()).updatePosition(t.getSecurity().getTicker(), -t.getQuantity());
 			
 			this.totalFees += t.getBuyerFee() + t.getSellerFee(); 
 		}
